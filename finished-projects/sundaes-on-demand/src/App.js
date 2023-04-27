@@ -6,6 +6,9 @@ import OrderEntry from "./pages/entry/OrderEntry";
 import OrderSummary from "./pages/summary/OrderSummary";
 
 import { OrderDetailsProvider } from "./contexts/OrderDetails";
+import {Provider} from "react-redux";
+import ConfigureStore from './store/configureStore'
+import composeReducers from "./store/rootReducer";
 
 export default function App() {
   // orderPhase needs to be 'inProgress', 'review' or 'completed'
@@ -25,9 +28,13 @@ export default function App() {
     default:
   }
 
+  const store = ConfigureStore(composeReducers())
+
   return (
+      <Provider store={store} >
     <OrderDetailsProvider>
       <Container>{<Component setOrderPhase={setOrderPhase} />}</Container>
     </OrderDetailsProvider>
+      </Provider>
   );
 }
