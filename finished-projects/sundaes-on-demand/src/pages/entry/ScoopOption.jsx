@@ -2,10 +2,10 @@ import { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { useOrderDetails } from "../../contexts/OrderDetails";
+import {connect} from "react-redux";
+import {UpdateItemCount} from "../../store/actions";
 
-export default function ScoopOptions({ name, imagePath }) {
-  const { updateItemCount } = useOrderDetails();
+function ScoopOptions({ name, imagePath, UpdateItemCount }) {
 
   const [isValid, setIsValid] = useState(true);
   const handleChange = (event) => {
@@ -23,7 +23,7 @@ export default function ScoopOptions({ name, imagePath }) {
 
     // adjust scoop count with currentValue if it's valid; 0 if it's not
     const newValue = valueIsValid ? parseInt(currentValue) : 0;
-    updateItemCount(name, newValue, "scoops");
+    UpdateItemCount(name, newValue, "scoops");
   };
 
   return (
@@ -53,3 +53,5 @@ export default function ScoopOptions({ name, imagePath }) {
     </Col>
   );
 }
+
+export default connect(null, {UpdateItemCount})(ScoopOptions)

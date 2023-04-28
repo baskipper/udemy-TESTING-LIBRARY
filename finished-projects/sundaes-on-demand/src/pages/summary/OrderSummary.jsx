@@ -1,12 +1,13 @@
 import React from "react";
+import {connect} from "react-redux";
 import SummaryForm from "./SummaryForm";
-import { useOrderDetails } from "../../contexts/OrderDetails";
 import { formatCurrency } from "../../utilities";
+import {getTotals, getCurrentOrder} from "../../store/selectors";
 
-export default function OrderSummary({ setOrderPhase }) {
-  const { totals, optionCounts } = useOrderDetails();
+function OrderSummary({ setOrderPhase, currentOrder, totals }) {
+  // const { optionCounts } = useOrderDetails();
 
-  const scoopArray = Object.entries(optionCounts.scoops);
+  const scoopArray = Object.entries(currentOrder.scoops);
   const scoopList = scoopArray.map(([key, value]) => (
     <li key={key}>
       {value} {key}
@@ -18,7 +19,7 @@ export default function OrderSummary({ setOrderPhase }) {
   let toppingsDisplay = null;
 
   if (hasToppings) {
-    const toppingsArray = Object.keys(optionCounts.toppings);
+    const toppingsArray = Object.keys(currentOrder.toppings);
     const toppingList = toppingsArray.map((key) => <li key={key}>{key}</li>);
     toppingsDisplay = (
       <>
@@ -38,3 +39,5 @@ export default function OrderSummary({ setOrderPhase }) {
     </div>
   );
 }
+
+export default connect(state => ({totals: getTotals(state), currentOrder: getCurrentOrder(state)}))(OrderSummary)

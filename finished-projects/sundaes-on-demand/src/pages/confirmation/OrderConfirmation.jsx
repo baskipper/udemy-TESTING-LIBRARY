@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {connect} from "react-redux";
 import Button from "react-bootstrap/Button";
-import { useOrderDetails } from "../../contexts/OrderDetails";
+import {ResetOrder} from "../../store/actions";
 import AlertBanner from "../common/AlertBanner";
 
-export default function OrderConfirmation({ setOrderPhase }) {
-  const { resetOrder } = useOrderDetails();
+function OrderConfirmation({ setOrderPhase }) {
   const [orderNumber, setOrderNumber] = useState(null);
   const [error, setError] = useState(false);
 
@@ -22,7 +22,7 @@ export default function OrderConfirmation({ setOrderPhase }) {
 
   function handleClick() {
     // clear the order details
-    resetOrder();
+    ResetOrder();
 
     // send back to order page
     setOrderPhase("inProgress");
@@ -56,3 +56,5 @@ export default function OrderConfirmation({ setOrderPhase }) {
     return <div>Loading</div>;
   }
 }
+
+export default connect(null, {ResetOrder})(OrderConfirmation)

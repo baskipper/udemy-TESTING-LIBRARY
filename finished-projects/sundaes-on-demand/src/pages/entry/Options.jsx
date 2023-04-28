@@ -1,17 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import {connect} from "react-redux";
+import {getTotals} from "../../store/selectors";
 import Row from "react-bootstrap/Row";
 import ScoopOption from "./ScoopOption";
 import ToppingOption from "./ToppingOption";
 import AlertBanner from "../common/AlertBanner";
 import { pricePerItem } from "../../constants";
 import { formatCurrency } from "../../utilities";
-import { useOrderDetails } from "../../contexts/OrderDetails";
 
-export default function Options({ optionType }) {
+function Options({ optionType, totals }) {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(false);
-  const { totals } = useOrderDetails();
 
   useEffect(() => {
     // create an abortController to attach to the network request
@@ -60,3 +60,5 @@ export default function Options({ optionType }) {
     </>
   );
 }
+
+export default connect(state => ({totals: getTotals(state)}))(Options)

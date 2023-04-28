@@ -11,7 +11,7 @@ export default (rootReducer, appMiddleware = [], initialState = {}) => {
     // if (__DEV__) {
         // this will use a local dev tools server within React Native Debugger instead of the one at remotedev.io
         // follow instructions to get the debugger installed https://github.com/jhen0409/react-native-debugger
-        // const composeEnhancers = composeWithDevTools({name: 'unit-test-demo-app'})
+        const composeEnhancers = composeWithDevTools({name: 'unit-test-demo-app'})
         //
         // store = createStore(
         //     rootReducer,
@@ -22,7 +22,8 @@ export default (rootReducer, appMiddleware = [], initialState = {}) => {
         store = createStore(
             rootReducer,
             initialState,
-            compose(applyMiddleware(...middleware))
+            composeEnhancers(applyMiddleware(...middleware))
+            // compose(applyMiddleware(...middleware))
         )
     // }
 

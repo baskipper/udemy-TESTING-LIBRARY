@@ -1,11 +1,11 @@
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import { useOrderDetails } from "../../contexts/OrderDetails";
+import {UpdateItemCount} from "../../store/actions";
+import {connect} from "react-redux";
 
-export default function ToppingOption({ name, imagePath }) {
-  const { updateItemCount } = useOrderDetails();
+const ToppingOption = ({ name, imagePath, UpdateItemCount }) => {
   const handleChange = (e) => {
-    updateItemCount(name, e.target.checked ? 1 : 0, "toppings");
+    UpdateItemCount(name, e.target.checked ? 1 : 0, "toppings");
   };
 
   return (
@@ -21,3 +21,5 @@ export default function ToppingOption({ name, imagePath }) {
     </Col>
   );
 }
+
+export default connect(null, {UpdateItemCount})(ToppingOption)
