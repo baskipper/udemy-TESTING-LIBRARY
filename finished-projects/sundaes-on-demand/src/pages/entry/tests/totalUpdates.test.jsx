@@ -2,6 +2,7 @@ import { render, screen } from "../../../test-utils/testing-library-utils";
 import userEvent from "@testing-library/user-event";
 import Options from "../Options";
 import OrderEntry from "../OrderEntry";
+import {ResetOrder} from "../../../store/actions";
 
 test("subtotal starts at 0", async () => {
   const { unmount } = render(<Options optionType="scoops" />);
@@ -92,7 +93,9 @@ describe("grand total", () => {
 
   test("grand total updates properly if topping is added first", async () => {
     const user = userEvent.setup();
-    render(<OrderEntry />);
+    const {store} = render(<OrderEntry />);
+    store.dispatch(ResetOrder())
+
     const grandTotal = screen.getByRole("heading", { name: /Grand total: \$/ });
 
     // add cherries and check grand total

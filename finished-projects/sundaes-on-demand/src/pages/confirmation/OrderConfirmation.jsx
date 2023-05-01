@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import {ResetOrder} from "../../store/actions";
 import AlertBanner from "../common/AlertBanner";
 
-function OrderConfirmation({ setOrderPhase }) {
+function OrderConfirmation({ setOrderPhase, ResetOrder }) {
   const [orderNumber, setOrderNumber] = useState(null);
   const [error, setError] = useState(false);
 
@@ -20,12 +20,12 @@ function OrderConfirmation({ setOrderPhase }) {
       .catch((error) => setError(true));
   }, []);
 
-  function handleClick() {
-    // clear the order details
-    ResetOrder();
+    function handleClick() {
+      // clear the order details
+      ResetOrder();
 
-    // send back to order page
-    setOrderPhase("inProgress");
+      // send back to order page
+      setOrderPhase("inProgress");
   }
 
   const newOrderButton = (
