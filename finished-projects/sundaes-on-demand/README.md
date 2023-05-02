@@ -1,3 +1,14 @@
+#React testing library references
+[Types of queries](https://testing-library.com/docs/queries/about)
+
+[React Testing Library Cheatsheet](https://testing-library.com/docs/react-testing-library/cheatsheet/)
+
+[Which query should I use?](https://testing-library.com/docs/queries/about/#priority)
+
+#Mock Service worker
+[Setting up for API query mocks](https://mswjs.io/docs/getting-started/mocks/rest-api)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
